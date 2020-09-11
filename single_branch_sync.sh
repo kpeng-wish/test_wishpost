@@ -1,6 +1,7 @@
 #! /bin/bash
 
 branch=$1
+
 if [ ! $branch ]; then
     echo "need branch param"
     exit
@@ -13,7 +14,7 @@ fi
 
 # cd $WISHPOST_DIR
 
-wishpost_dir=/home/ubuntu/wishpost
+wishpost_dir=$CL_HOME
 if [ ! -d $wishpost_dir ]; then
 	echo no wishpost dir
 	mkdir $wishpost_dir
@@ -25,8 +26,10 @@ else
 	cd $wishpost_dir
 fi
 
-git remote set-url origin https://tigu-wish:f7342656d81901fd9b4857c5dfdf962c03861206@github.com.cnpmjs.org/ContextLogic/wishpost.git 
-git remote set-url clroot https://tigu-wish:f7342656d81901fd9b4857c5dfdf962c03861206@github.com.cnpmjs.org/ContextLogic/clroot.git 
+git remote add origin https://$GIT_USERNAME:$GIT_TOKEN@github.com.cnpmjs.org/ContextLogic/wishpost.git
+git remote add clroot https://$GIT_USERNAME:$GIT_TOKEN@github.com.cnpmjs.org/ContextLogic/clroot.git
+git remote set-url origin https://$GIT_USERNAME:$GIT_TOKEN@github.com.cnpmjs.org/ContextLogic/wishpost.git 
+git remote set-url clroot https://$GIT_USERNAME:$GIT_TOKEN@github.com.cnpmjs.org/ContextLogic/clroot.git 
 
 echo ""
 echo "fetching and pruning remote clroot and remote wishpost branches, deleting the branches that no longer exist.."
